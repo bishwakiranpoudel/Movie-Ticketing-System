@@ -4,14 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Ticket</title>
+    <title>Book Tickets</title>
 </head>
 <body>
-    <h1>Book Ticket</h1>
+    <h1>Verify yourshelf</h1>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Submit</button>
+    
+        <h1>Please Confirn the Seats</h1>
+        <ul>
+            {% for ticket in tickets %}
+                <li>
+                    <label>
+                        Ticket: {{ ticket.seat_no }} - Status: {{ ticket.status }}
+                        {% if ticket.status == 'not_booked' %}
+                            <input type="checkbox" name="tickets" value="{{ ticket.id }}">
+                        {% endif %}
+                    </label>
+                </li>
+            {% endfor %}
+        </ul>
+        <input type="submit" value="Proceed">
     </form>
 </body>
 </html>

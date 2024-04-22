@@ -23,6 +23,11 @@ class Movie(models.Model):
     title = models.CharField(max_length=100)
     actors = models.TextField()
     director = models.CharField(max_length=100)
+    poster = models.ImageField(upload_to='movie_posters/')
+    description = models.TextField()
+
+    def __str__(self):
+        return self.title
 
 class Show(models.Model):
     id = models.AutoField(primary_key=True)

@@ -8,15 +8,20 @@
 </head>
 <body>
     <h1>Show Details for {{ show.start_time }}</h1>
-    <ul>
-        {% for ticket in tickets %}
-            <li>
-                Ticket: {{ ticket.seat_no }} - Status: {{ ticket.status }}
-                {% if ticket.status == 'not_booked' %}
-                <a href="{% url 'book_ticket' movie_id=movie.id theatre_id=theatre.id show_id=show.id ticket_id=ticket.id %}">Book Ticket</a>
-                {% endif %}
-            </li>
-        {% endfor %}
-    </ul>
+    <form action="{% url 'book_ticket' movie_id=movie.id theatre_id=theatre.id show_id=show.id %}" method="post">
+        {% csrf_token %}
+        <ul>
+            {% for ticket in tickets %}
+                <li>
+                    <label>
+                        Ticket: {{ ticket.seat_no }} - Status: {{ ticket.status }}
+                        {% if ticket.status == 'not_booked' %}
+                        {% endif %}
+                    </label>
+                </li>
+            {% endfor %}
+        </ul>
+        <input type="submit" value="Book Seats">
+    </form>
 </body>
 </html>

@@ -4,35 +4,41 @@ from .forms import CustomerLoginForm  # Import the CustomerLoginForm from your f
 
 from .models import Customer
 
-def book_ticket(request, movie_id, theatre_id, show_id, ticket_id):
-    ticket = get_object_or_404(Ticket, id=ticket_id)
-    
-    if ticket.status == 'not_booked':
-        if request.method == 'POST':
-            form = CustomerLoginForm(request.POST)
-            if form.is_valid():
-                username = form.cleaned_data['username']
-                password = form.cleaned_data['password']
+def book_ticket(request, movie_id, theatre_id, show_id):
+    if request.method == 'POST':
+        selected_tickets = request.POST.getlist('tickets')
+        print(selected_tickets)
+        print(1)
+        form = CustomerLoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            
+            # Retrieve the customer based on the entered username
+            customer = Customer.objects.filter(username=username).first()
+            
+            # Check if a customer with the provided username exists and if the password matches
+            if customer and customer.password == password:
+                # Update status and customer for each selected ticket
+                for ticket_id in selected_tickets:
+                    ticket = get_object_or_404(Ticket, id=ticket_id)
+                    if ticket.status == 'not_booked':
+                        ticket.status = 'booked'
+                        ticket.customer = customer
+                        ticket.save()
+                        print('done')
                 
-                # Retrieve the customer based on the entered username
-                customer = Customer.objects.filter(username=username).first()
-                
-                # Check if a customer with the provided username exists and if the password matches
-                if customer and customer.password == password:
-                    # Update ticket status to 'booked'
-                    ticket.status = 'booked'
-                    # Assign the ticket to the customer
-                    ticket.customer = customer
-                    ticket.save()
-                    return redirect('show_detail', show_id=show_id, movie_id=movie_id, theatre_id=theatre_id)
-                else:
-                    return render(request, 'app/invalid_credentials.html')
-        else:
-            form = CustomerLoginForm()
-        
-        return render(request, 'app/book_ticket.html', {'form': form, 'ticket': ticket})
+                # Redirect to the show detail page
+                return redirect('show_detail', show_id=show_id, movie_id=movie_id, theatre_id=theatre_id)
+            else:
+                return render(request, 'app/invalid_credentials.html')
     else:
-        return render(request, 'app/already_booked.html')
+        form = CustomerLoginForm()
+    
+    # Get the list of unbooked tickets for the show
+    unbooked_tickets = Ticket.objects.filter(show_id=show_id, status='not_booked')
+    
+    return render(request, 'app/book_ticket.html', {'form': form, 'tickets': unbooked_tickets})
 
 def movie_list(request):
     movies = Movie.objects.all()
