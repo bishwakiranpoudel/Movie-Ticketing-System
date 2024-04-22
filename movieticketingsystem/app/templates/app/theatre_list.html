@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theatre List for {{ movie.title }}</title>
+</head>
+<body>
+    <h1>Theatres for {{ movie.title }}</h1>
+    <ul>
+        {% for theatre, shows in theatre_shows.items %}
+            <li>{{ theatre.name }}</li>
+            <ul>
+                {% for show in shows %}
+                <li><a href="{% url 'show_detail' movie_id=movie.id theatre_id=show.theatre.id show_id=show.id %}">Show: {{ show.start_time }}</a></li>
+
+                    <!-- Add more show details as needed -->
+                {% endfor %}
+            </ul>
+        {% endfor %}
+    </ul>
+</body>
+</html>

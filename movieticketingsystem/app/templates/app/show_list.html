@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ movie.title }} - Shows</title>
+</head>
+<body>
+    <h1>{{ movie.title }} - Shows</h1>
+    <ul>
+        {% for show in shows %}
+            <li>{{ show.start_time }} - {{ show.end_time }} ({{ show.language }})</li>
+        {% empty %}
+            <li>No shows available</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

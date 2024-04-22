@@ -1,0 +1,22 @@
+<!-- app/templates/app/show_detail.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Details for {{ show.start_time }}</title>
+</head>
+<body>
+    <h1>Show Details for {{ show.start_time }}</h1>
+    <ul>
+        {% for ticket in tickets %}
+            <li>
+                Ticket: {{ ticket.seat_no }} - Status: {{ ticket.status }}
+                {% if ticket.status == 'not_booked' %}
+                <a href="{% url 'book_ticket' movie_id=movie.id theatre_id=theatre.id show_id=show.id ticket_id=ticket.id %}">Book Ticket</a>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

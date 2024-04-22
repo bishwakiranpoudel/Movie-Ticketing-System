@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seat Booking for {{ show.start_time }} - {{ show.end_time }}</title>
+</head>
+<body>
+    <h1>Available Seats for {{ show.start_time }} - {{ show.end_time }}</h1>
+    <form method="post">
+        {% csrf_token %}
+        <select name="seat">
+            {% for seat in available_seats %}
+                <option value="{{ seat }}">Seat {{ seat }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Book Seat">
+    </form>
+</body>
+</html>
