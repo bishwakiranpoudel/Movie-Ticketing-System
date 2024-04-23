@@ -1,27 +1,23 @@
-<!-- app/templates/app/show_detail.html -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Show Details for {{ show.start_time }}</title>
-</head>
-<body>
-    <h1>Show Details for {{ show.start_time }}</h1>
+{% extends 'app/base.html' %}
+
+{% block content %}
+<div class="show-details-container">
+    <h1>Seats for {{ show.start_time }}</h1>
     <form action="{% url 'book_ticket' movie_id=movie.id theatre_id=theatre.id show_id=show.id %}" method="post">
         {% csrf_token %}
-        <ul>
+        <div class="ticket-container">
             {% for ticket in tickets %}
-                <li>
+                <div class="ticket {% if ticket.status == 'booked' %} booked {% endif %}">
                     <label>
-                        Ticket: {{ ticket.seat_no }} - Status: {{ ticket.status }}
-                        {% if ticket.status == 'not_booked' %}
-                        {% endif %}
+                      {{ ticket.seat_no }}
                     </label>
-                </li>
+                </div>
+                {% if forloop.counter0|divisibleby:10 and not forloop.last %}
+                    </div><div class="ticket-container">
+                {% endif %}
             {% endfor %}
-        </ul>
-        <input type="submit" value="Book Seats">
+        </div>
+        <input type="submit" value="Book Seats" class="book-button">
     </form>
-</body>
-</html>
+</div>
+{% endblock %}

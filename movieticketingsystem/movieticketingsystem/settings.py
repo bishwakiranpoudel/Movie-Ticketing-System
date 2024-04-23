@@ -55,7 +55,7 @@ ROOT_URLCONF = 'movieticketingsystem.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'app/templates'],  # Add the correct template directory here
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -118,7 +118,13 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, etc.)
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
+# This is only used in production for collecting static files.
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Media files (User-uploaded files like images)
 MEDIA_URL = '/media/'

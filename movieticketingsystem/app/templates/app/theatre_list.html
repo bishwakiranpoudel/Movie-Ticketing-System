@@ -1,26 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Theatre List for {{ movie.title }}</title>
-</head>
-<body>
-    <img src="{{ movie.poster.url }}" alt="{{ movie.title }} Poster" style="max-width: 150px;">
-    <h1>{{ movie.title }}</h1>
-    <p>{{ movie.description }}</p>
-    <h2>Available Theatres</h2>
-    <ul>
-        {% for theatre, shows in theatre_shows.items %}
-            <li>{{ theatre.name }}</li>
-            <ul>
-                {% for show in shows %}
-                <li><a href="{% url 'show_detail' movie_id=movie.id theatre_id=show.theatre.id show_id=show.id %}">Show: {{ show.start_time }}</a></li>
+{% extends 'app/base.html' %}
 
-                    <!-- Add more show details as needed -->
-                {% endfor %}
-            </ul>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+{% block content %}
+<div class="movie-details-container">
+    <div class="movie-poster">
+        <img src="{{ movie.poster.url }}" alt="{{ movie.title }} Poster">
+    </div>
+    <div class="movie-info">
+        <h1>{{ movie.title }}</h1>
+        <p class="movie-description">{{ movie.description }}</p>
+        <h2>Available Theatres</h2>
+        <ul class="theatre-list">
+            {% for theatre, shows in theatre_shows.items %}
+            <li class="theatre-item">
+                <h3>{{ theatre.name }}</h3>
+                <ul class="show-list">
+                    {% for show in shows %}
+                    <li class="show-item">
+                        <a href="{% url 'show_detail' movie_id=movie.id theatre_id=show.theatre.id show_id=show.id %}" class="show-link glassmorphic-btn">Show: {{ show.start_time }}</a>
+                        <!-- Add more show details as needed -->
+                    </li>
+                    {% endfor %}
+                </ul>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

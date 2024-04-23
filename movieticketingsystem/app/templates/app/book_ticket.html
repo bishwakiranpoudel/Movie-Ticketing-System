@@ -1,31 +1,46 @@
-<!-- app/templates/app/book_ticket.html -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Tickets</title>
-</head>
-<body>
-    <h1>Verify yourshelf</h1>
+{% extends 'app/base.html' %}
+
+{% block content %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+ $(document).ready(function() {
+        $('.ticket-item').click(function() {
+            $(this).toggleClass('selected');
+            if ($(this).hasClass('selected')) {
+                $(this).css('background-color', '#4CAF50'); /* Green color */
+            } else {
+                $(this).css('background-color', '#FFD700'); /* Yellow color */
+            }
+            $(this).find('.ticket-checkbox').prop('checked', function(i, value) {
+                return !value;
+            });
+        });
+    });
+</script>
+
+<div class="verification-container">
+    <h1>Verify Yourself</h1>
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-    
-        <h1>Please Confirn the Seats</h1>
-        <ul>
+        <div class="form-container">
+            {{ form.as_p }}
+        </div>
+
+        <h2>Please Confirm the Seats</h2>
+        <div class="ticket-container">
             {% for ticket in tickets %}
-                <li>
-                    <label>
-                        Ticket: {{ ticket.seat_no }} - Status: {{ ticket.status }}
-                        {% if ticket.status == 'not_booked' %}
-                            <input type="checkbox" name="tickets" value="{{ ticket.id }}">
-                        {% endif %}
-                    </label>
-                </li>
+                <label class="ticket-item {% if ticket.status == 'not_booked' %} available {% endif %}" data-ticket-id="{{ ticket.id }}">
+                    {{ ticket.seat_no }}
+                    {% if ticket.status == 'not_booked' %}
+                        <input type="checkbox" name="tickets" value="{{ ticket.id }}" class="ticket-checkbox">
+                    {% endif %}
+                </label>
+                {% if forloop.counter0|divisibleby:5 and not forloop.last %}
+                    </div><div class="ticket-container">
+                {% endif %}
             {% endfor %}
-        </ul>
-        <input type="submit" value="Proceed">
+        </div>
+        <input type="submit" value="Proceed" class="proceed-button">
     </form>
-</body>
-</html>
+</div>
+{% endblock %}
