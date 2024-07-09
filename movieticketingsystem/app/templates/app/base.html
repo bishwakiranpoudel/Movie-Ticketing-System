@@ -7,9 +7,127 @@
     <title>Your Django Project</title>
     <!-- Link to main.css -->
     <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ultra&display=swap" rel="stylesheet">
 </head>
 <body>
+    <nav class="menu-container">
+        <!-- burger menu -->
+        <input type="checkbox" aria-label="Toggle menu" />
+        <span></span>
+        <span></span>
+        <span></span>
+      
+        <!-- logo -->
+        <a href="/" class="menu-logo">
+          <img src="https://media.discordapp.net/attachments/1254807118293241889/1260092589768446063/Fun_Panda_illustration_Movie_Logo_1.png?ex=668e102c&is=668cbeac&hm=8051f3326afc40a08b9deccb47346f3df16fa8674cf543494e48dc61ce365d0a&=&format=webp&quality=lossless&width=625&height=470" alt="My Awesome Website"/>
+        </a>
+      
+        <!-- menu items -->
+        <div class="menu">
+          <ul>
+          </ul>
+          <ul>
+            <li>
+              <a href="{% url 'login' %}">
+                Login
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
     {% block content %}
     {% endblock %}
+
+    <!-- Remove the container if you want to extend the Footer to full width. -->
+
+
+  <footer class="text-white text-center text-lg-start" style="background-color: #23242a;">
+    <!-- Grid container -->
+    <div class="container p-4">
+      <!--Grid row-->
+      <div class="row mt-4">
+        <!--Grid column-->
+        <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
+          <h5 class="text-uppercase mb-4">About company</h5>
+
+          <p>
+            Movie Booking System is a comprehensive platform designed to simplify the process of booking movie tickets online. Users can browse through a variety of theatres and movies, view showtimes, and book tickets with ease. 
+          </p>
+
+          <p>
+            The system includes beautifully designed templates for a seamless user experience, including a centered and stylish login form and a personalized profile page displaying user information and booked tickets. Admins can manage theatres, movies, shows, and customer details efficiently, ensuring a smooth operation for both users and administrators.
+          </p>
+
+         
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+          <h5 class="text-uppercase mb-4 pb-1">Search something</h5>
+
+          <div class="form-outline form-white mb-4">
+            <input type="text" id="formControlLg" class="form-control form-control-lg" style="border-radius: 0px;">
+            
+          <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 48.8px;"></div><div class="form-notch-trailing"></div></div></div>
+
+          <ul class="fa-ul" style="margin-left: 1.65em;">
+            <li class="mb-3">
+              <span class="fa-li"><i class="fas fa-home"></i></span><span class="ms-2">Birtamode, Jhapa, Nepal</span>
+            </li>
+            <li class="mb-3">
+              <span class="fa-li"><i class="fas fa-envelope"></i></span><span class="ms-2">info@pandamovies.com</span>
+            </li>
+            <li class="mb-3">
+              <span class="fa-li"><i class="fas fa-phone"></i></span><span class="ms-2">+ 977 981 795 9559</span>
+            </li>
+            
+          </ul>
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+          <h5 class="text-uppercase mb-4">Opening hours</h5>
+
+          <table class="table text-center text-white">
+            <tbody class="font-weight-normal">
+              <tr>
+                <td>Mon - Thu:</td>
+                <td>8am - 9pm</td>
+              </tr>
+              <tr>
+                <td>Fri - Sat:</td>
+                <td>8am - 1am</td>
+              </tr>
+              <tr>
+                <td>Sunday:</td>
+                <td>9am - 10pm</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!--Grid column-->
+      </div>
+      <!--Grid row-->
+    </div>
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      © 2024 Copyright:
+      <a class="text-white" href="/">pandamovies.com</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
+  
+
+<!-- End of .container -->
 </body>
 </html>

@@ -12,5 +12,7 @@ urlpatterns = [
     path('shows/<int:show_id>/book/', views.seat_booking, name='seat_booking'),
     path('movies/<int:movie_id>/theatres/<int:theatre_id>/shows/', views.show_list, name='show_list'),
      path('movies/<int:movie_id>/theatres/<int:theatre_id>/shows/<int:show_id>/book/', views.book_ticket, name='book_ticket'),
+     path('login/', views.login_view, name='login'),
+    path('profile/', views.profile_view, name='profile'),
     # Add more URL patterns for other views
     ]

@@ -1,0 +1,126 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
+    <style>
+        body {
+          
+            background-color: #ecefef;
+opacity: 1;
+background-image: radial-gradient(#01020d 0.5px, #ecefef 0.5px);
+background-size: 10px 10px;
+        }
+        .card {
+            margin-top: 20px;
+            border: none;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        .card-header {
+            background-color: #343a40;
+            color: #fff;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .profile-info h5 {
+            font-weight: normal;
+            margin: 5px 0;
+        }
+        .table thead th {
+            border: none;
+            background-color: #343a40;
+            color: #fff;
+        }
+        .table tbody tr {
+            background-color: #fff;
+        }
+        .table tbody tr:nth-of-type(even) {
+            background-color: #f2f2f2;
+        }
+        .table tbody td {
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <nav class="menu-container">
+        <!-- burger menu -->
+        <input type="checkbox" aria-label="Toggle menu" />
+        <span></span>
+        <span></span>
+        <span></span>
+      
+        <!-- logo -->
+        <a href="/" class="menu-logo">
+          <img src="https://media.discordapp.net/attachments/1254807118293241889/1260092589768446063/Fun_Panda_illustration_Movie_Logo_1.png?ex=668e102c&is=668cbeac&hm=8051f3326afc40a08b9deccb47346f3df16fa8674cf543494e48dc61ce365d0a&=&format=webp&quality=lossless&width=625&height=470" alt="My Awesome Website"/>
+        </a>
+      
+        <!-- menu items -->
+        <div class="menu">
+          <ul>
+          </ul>
+          <ul>
+            <li>
+              <a href="signup">
+                Sign-up
+              </a>
+            </li>
+            <li>
+              <a href="login">
+                Login
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+
+    <div class="container">
+        <div class="row justify-content-center" style="width: 100%;">
+            <div class="col-md-10">
+                <div class="card">
+                    <div class="card-header">
+                        Profile
+                    </div>
+                    <div class="card-body">
+                        <div class="profile-info">
+                            <h5>Username: {{ customer.username }}</h5>
+                            <h5>Email: {{ customer.email }}</h5>
+                            <h5>Phone: {{ customer.phone_no }}</h5>
+                        </div>
+                        <hr>
+                        <h4 class="text-center">Booked Tickets</h4>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Movie</th>
+                                    <th>Theatre</th>
+                                    <th>Seat No</th>
+                                    <th>Price</th>
+                                    <th>Show Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for ticket in tickets %}
+                                <tr>
+                                    <td>{{ ticket.show.movie.title }}</td>
+                                    <td>{{ ticket.show.theatre.name }}</td>
+                                    <td>{{ ticket.seat_no }}</td>
+                                    <td>${{ ticket.price }}</td>
+                                    <td>{{ ticket.show.start_time }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

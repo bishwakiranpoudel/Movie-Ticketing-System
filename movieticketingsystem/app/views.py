@@ -1,8 +1,12 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from .models import Movie, Theatre, Show, Ticket
 from .forms import CustomerLoginForm  # Import the CustomerLoginForm from your forms module
-
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 from .models import Customer
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 def book_ticket(request, movie_id, theatre_id, show_id):
     if request.method == 'POST':
@@ -87,3 +91,44 @@ def show_list(request, movie_id, theatre_id):
     shows = Show.objects.filter(movie=movie, theatre_id=theatre_id)
     
     return render(request, 'app/show_list.html', {'movie': movie, 'shows': shows})
+
+def custom_login(request, user):
+    # Manually create a session for the user
+    request.session['user_id'] = user.cid
+    request.session['username'] = user.username
+
+    # Mark the user as authenticated
+    user.is_authenticated = True
+
+    # You can add any additional login logic here if needed
+
+def login_view(request):
+    if request.method == 'POST':
+        form = CustomerLoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            try:
+                customer = Customer.objects.get(username=username, password=password)
+                custom_login(request, customer)  # Use the custom login function
+                return redirect('profile')
+            except Customer.DoesNotExist:
+                return render(request, 'app/login.html', {'form': form, 'error': 'Invalid credentials'})
+    else:
+        form = CustomerLoginForm()
+    return render(request, 'app/login.html', {'form': form})
+
+def login_required_custom(view_func):
+    def _wrapped_view_func(request, *args, **kwargs):
+        if 'user_id' not in request.session:
+            return HttpResponseRedirect(reverse('login'))
+        return view_func(request, *args, **kwargs)
+    return _wrapped_view_func
+
+@login_required_custom
+def profile_view(request):
+    # Fetch the logged-in customer based on session data
+    customer_id = request.session.get('user_id')
+    customer = Customer.objects.get(cid=customer_id)
+    tickets = Ticket.objects.filter(customer=customer)
+    return render(request, 'app/profile.html', {'customer': customer, 'tickets': tickets})

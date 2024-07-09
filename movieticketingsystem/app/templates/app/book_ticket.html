@@ -1,6 +1,7 @@
 {% extends 'app/base.html' %}
 
 {% block content %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
  $(document).ready(function() {
@@ -18,29 +19,62 @@
     });
 </script>
 
-<div class="verification-container">
-    <h1>Verify Yourself</h1>
-    <form method="post">
-        {% csrf_token %}
-        <div class="form-container">
-            {{ form.as_p }}
-        </div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="verification-container">
+                <h1>Verify Yourself</h1>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-container">
+                        {{ form.as_p }}
+                    </div>
 
-        <h2>Please Confirm the Seats</h2>
-        <div class="ticket-container">
-            {% for ticket in tickets %}
-                <label class="ticket-item {% if ticket.status == 'not_booked' %} available {% endif %}" data-ticket-id="{{ ticket.id }}">
-                    {{ ticket.seat_no }}
-                    {% if ticket.status == 'not_booked' %}
-                        <input type="checkbox" name="tickets" value="{{ ticket.id }}" class="ticket-checkbox">
-                    {% endif %}
-                </label>
-                {% if forloop.counter0|divisibleby:5 and not forloop.last %}
-                    </div><div class="ticket-container">
-                {% endif %}
-            {% endfor %}
+                    <h2>Please Confirm the Seats</h2>
+                    <div class="ticket-container row">
+                        {% for ticket in tickets %}
+                            <div class="col-3 mb-2 ticket-item">
+                                <label class="{% if ticket.status == 'not_booked' %} available {% endif %}" data-ticket-id="{{ ticket.id }}">
+                                    {{ ticket.seat_no }}
+                                    {% if ticket.status == 'not_booked' %}
+                                        <input type="checkbox" name="tickets" value="{{ ticket.id }}" class="ticket-checkbox">
+                                    {% endif %}
+                                </label>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <input type="submit" value="Proceed" class="btn btn-success proceed-button">
+                </form>
+            </div>
         </div>
-        <input type="submit" value="Proceed" class="proceed-button">
-    </form>
+        <div class="col-md-6">
+            <div class="right">
+                <img src="https://media.discordapp.net/attachments/1254807118293241889/1260177017467306024/1.png?ex=668e5ecd&is=668d0d4d&hm=e21702c347bbe5bf9c3b9876a3c311abf14f3a593a7a0a772abb5b2f49e0f5f4&=&format=webp&quality=lossless&width=530&height=602" alt="seating" class="img-fluid w-100 h-100"/>
+            </div>
+        </div>
+    </div>
 </div>
+
+<style>
+    .ticket-item {
+        display: block;
+        text-align: center;
+        padding: 10px;
+        border: 1px solid #ccc;
+        cursor: pointer;
+        background-color: #FFD700; /* Yellow color */
+    }
+    .ticket-item.selected {
+        background-color: #4CAF50 !important; /* Green color */
+    }
+    .ticket-container {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .proceed-button {
+        margin-top: 20px;
+        width: 100%;
+    }
+</style>
+
 {% endblock %}

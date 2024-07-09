@@ -1,0 +1,556 @@
+@import url('https://fonts.googleapis.com/css2?family=Ultra&display=swap');
+
+/* Reset default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #ecefef;
+opacity: 1;
+background-image: radial-gradient(#01020d 0.5px, #e6f7f5 0.5px);
+background-size: 10px 10px;
+}
+
+
+/* Container for movie list */
+.movie-list-container {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 20px 0;
+}
+
+/* Movie list styles */
+.movie-list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Individual movie card styles */
+.movie-card {
+    display: inline-block;
+    margin-right: 20px;
+    width: 400px; /* Adjust as needed */
+    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.15); /* Adjust opacity as needed */
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    align-items: center; /* Align items vertically */
+}
+
+.poster {
+    width: 40%;
+    border-radius: 15px;
+    height: 200px;
+    object-fit: cover;
+    flex: 0 0 auto; /* Let the image shrink, but not grow */
+    margin-right: 10px; /* Adjust margin as needed */
+}
+
+.details {
+    padding: 20px;
+    width: 60%;
+    flex: 1; /* Expand to fill remaining space */
+}
+
+/* Watch button styles */
+.watch-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50; /* Green color */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+}
+
+.watch-button:hover {
+    background-color: #45a049; /* Darker green color */
+}
+
+.glass-effect {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+/* Glassmorphic Button Styles */
+.glassmorphic-btn {
+    background-color: rgba(255, 255, 255, 0.3);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.glassmorphic-btn:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+    border-color: rgba(255, 255, 255, 0.8);
+    color: #fff;
+}
+
+/* Glassmorphic Background */
+.glassmorphic-bg {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+
+/* Movie details container */
+.movie-details-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+/* Movie poster */
+.movie-poster img {
+    max-width: 200px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Movie info */
+.movie-info {
+    margin-left: 40px;
+}
+
+/* Movie title */
+.movie-info h1 {
+    font-size: 28px;
+    color: #333;
+}
+
+/* Movie description */
+.movie-description {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* Theatre list */
+.theatre-list {
+    list-style: none;
+    padding: 0;
+}
+
+/* Theatre item */
+.theatre-item {
+    margin-bottom: 20px;
+}
+
+/* Theatre name */
+.theatre-item h3 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Show list */
+.show-list {
+    list-style: none;
+    padding: 0;
+}
+
+/* Show item */
+.show-item {
+    margin-bottom: 10px;
+}
+
+/* Show button styles */
+.show-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50; /* Blue color */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+}
+
+.show-link:hover {
+    background-color: #45a049; /* Darker blue color */
+}
+
+
+/* Show details container */
+.show-details-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Ticket container */
+.ticket-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+/* Ticket */
+.ticket {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50; /* Green color */
+    color: #fff;
+    border-radius: 5px;
+    margin: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Booked ticket */
+.ticket.booked {
+    background-color: #FF5733; /* Red color */
+}
+
+/* Book button */
+.book-button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #007bff; /* Blue color */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.book-button:hover {
+    background-color: #0056b3; /* Darker blue color */
+}
+
+
+/* Ticket container */
+.ticket-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin-top: 20px;
+}
+
+/* Ticket item */
+.ticket-item {
+    display: block;
+    padding: 10px;
+    margin: 5px;
+    background-color: #4CAF50; /* Green color */
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Available ticket */
+
+
+/* Ticket checkbox */
+.ticket-checkbox {
+    display: none; /* Hide checkboxes initially */
+}
+
+/* Proceed button */
+.proceed-button {
+    display: block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff; /* Blue color */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.proceed-button:hover {
+    background-color: #0056b3; /* Darker blue color */
+}
+
+.selected{
+    background-color: #4CAF50;
+}
+
+
+/* static/css/styles.css */
+/* Style for form container */
+.form-container {
+    max-width: 300px;
+    
+}
+
+/* Style for form fields */
+input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: none;
+    border-bottom: 1px solid #aaa;
+    background-color: white;
+    transition: border-bottom-color 0.3s ease;
+    border-radius: 7px;
+}
+
+input[type="text"]:focus, input[type="password"]:focus {
+    border-bottom-color: #4CAF50;
+    outline: none;
+    border-radius: 7px;
+}
+
+/* Style for submit button */
+input[type="submit"] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    margin: 20px 0 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+/* Style for form title */
+.form-title {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 24px;
+}
+
+.errorlist{
+    display: none
+}
+
+
+
+
+.menu-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: #23242a;
+    color: white;
+    padding: 20px;
+    z-index: 1;
+    -webkit-user-select: none;
+    user-select: none;
+    box-sizing: border-box;
+  }
+  
+  .menu-logo {
+    line-height: 0;
+    margin: 0 20px;
+  }
+  
+  .menu-logo img {
+    max-height: 55px;
+    max-width: 300px;
+    flex-shrink: 0;
+  }
+  
+  .menu-container a {
+    text-decoration: none;
+    color: #232323;
+    transition: color 0.3s ease;
+  }
+  
+  .menu-container a:hover {
+    color: #00C6A7;
+  }
+  
+  .menu-container input {
+    display: block;
+    width: 35px;
+    height: 25px;
+    margin: 0;
+    position: absolute;
+    cursor: pointer;
+    opacity: 0; /* hide this */
+    z-index: 2; /* and place it over the hamburger */
+    -webkit-touch-callout: none;
+  }
+  
+  /* Burger menu */
+  .menu-container span {
+    display: block;
+    width: 33px;
+    height: 4px;
+    margin-bottom: 5px;
+    position: relative;
+    background: #cdcdcd;
+    border-radius: 3px;
+    z-index: 1;
+    transform-origin: 4px 0px;
+    transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+                background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+                opacity 0.55s ease;
+  }
+  
+  .menu-container span:first-child {
+    transform-origin: 0% 0%;
+  }
+  
+  .menu-container span:nth-child(3) {
+    transform-origin: 0% 100%;
+  }
+  
+  .menu-container input:checked ~ span {
+    opacity: 1;
+    transform: rotate(45deg) translate(3px,-1px);
+    background: #232323;
+  }
+  
+  .menu-container input:checked ~ span:nth-child(4) {
+    opacity: 0;
+    transform: rotate(0deg) scale(0.2, 0.2);
+  }
+  
+  .menu-container input:checked ~ span:nth-child(3) {
+    transform: rotate(-45deg) translate(-5px,11px);
+  }
+  
+  .menu ul {
+    list-style: none;
+  }
+  
+  .menu li {
+    padding: 10px 0;
+    font-size: 22px;
+  }
+  
+  /* mobile styles */
+  @media only screen and (max-width: 767px) { 
+    .menu-container {
+      flex-direction: column;
+      align-items: flex-end;
+    }
+    
+    .menu-logo {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  
+    .menu-logo img {
+      max-height: 30px;
+    }
+  
+    .menu {
+      position: absolute;
+      box-sizing: border-box;
+      width: 300px;
+      right: -300px;
+      top: 0;
+      margin: -20px;
+      padding: 75px 50px 50px;
+      background: #cdcdcd;
+      -webkit-font-smoothing: antialiased;
+      /* to stop flickering of text in safari */
+      transform-origin: 0% 0%;
+      transform: translateX(0%);
+      transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+    }
+  
+    .menu-container input:checked ~ .menu {
+      transform: translateX(-100%);
+    }
+  }
+  
+  /* desktop styles */
+  @media only screen and (min-width: 768px) { 
+    .menu-container {
+      width: 100%;
+    }
+  
+    .menu-container a {
+      color: #cdcdcd;
+    }
+  
+    .menu-container input {
+      display: none;
+    }
+  
+    /* Burger menu */
+    .menu-container span {
+      display: none;
+    }
+  
+    .menu {
+      position: relative;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+    }
+  
+    .menu ul {
+      display: flex;
+      padding: 0;
+    }
+  
+    .menu li {
+      padding: 0 20px;
+    }
+  }
+
+
+
+  #nowShowingCarousel {
+    width: 100%;
+    height: 60vh; /* Set the carousel height to 60% of the viewport height */
+    margin: 0;
+}
+
+.carousel-item img {
+    width: 100%; /* Ensure the image fills the carousel height */
+    object-fit: cover;
+    height: 60vh; /* Ensure the image covers the entire area without stretching */
+}
+
+.carousel-caption {
+    left: 10%; /* Adjust left padding */
+    right: auto;
+    text-align: left;
+    font-family: "Ultra", serif;
+    display: hidden;
+}
+
+.carousel-caption h5.movie-title {
+    
+    font-weight: 400;
+    font-style: normal;
+}

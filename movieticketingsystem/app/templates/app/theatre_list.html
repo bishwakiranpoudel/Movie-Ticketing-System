@@ -9,14 +9,14 @@
         <h1>{{ movie.title }}</h1>
         <p class="movie-description">{{ movie.description }}</p>
         <h2>Available Theatres</h2>
-        <ul class="theatre-list">
+        <ul class="theatre-list" style="display: flex;">
             {% for theatre, shows in theatre_shows.items %}
-            <li class="theatre-item">
+            <li class="theatre-item" style=" margin-right: 20px;">
                 <h3>{{ theatre.name }}</h3>
                 <ul class="show-list">
                     {% for show in shows %}
                     <li class="show-item">
-                        <a href="{% url 'show_detail' movie_id=movie.id theatre_id=show.theatre.id show_id=show.id %}" class="show-link glassmorphic-btn">Show: {{ show.start_time }}</a>
+                        <a href="{% url 'book_ticket' movie_id=movie.id theatre_id=theatre.id show_id=show.id %}" class="show-link glassmorphic-btn">Show: {{ show.start_time }}</a>
                         <!-- Add more show details as needed -->
                     </li>
                     {% endfor %}

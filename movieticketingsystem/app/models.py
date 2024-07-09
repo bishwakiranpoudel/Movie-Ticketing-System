@@ -24,6 +24,7 @@ class Movie(models.Model):
     actors = models.TextField()
     director = models.CharField(max_length=100)
     poster = models.ImageField(upload_to='movie_posters/')
+    banner = models.ImageField(upload_to='movie_banners/')
     description = models.TextField()
 
     def __str__(self):

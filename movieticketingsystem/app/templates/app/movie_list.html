@@ -1,7 +1,44 @@
 {% extends 'app/base.html' %}
 
 {% block content %}
-<h1>Now Showing</h1>
+
+<div id="nowShowingCarousel" class="carousel slide" data-ride="carousel" style="width: 100%; margin: 0;height: 70vh;">
+    <!-- Indicators -->
+    <ul class="carousel-indicators">
+        {% for movie in movies %}
+            <li data-target="#nowShowingCarousel" data-slide-to="{{ forloop.counter0 }}" class="{% if forloop.first %}active{% endif %}"></li>
+        {% endfor %}
+    </ul>
+
+    <!-- The slideshow -->
+    <div class="carousel-inner">
+        {% for movie in movies %}
+        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+            <div class="c">
+                <div class="image-holder">
+                    <img src="{{ movie.banner.url }}" alt="{{ movie.title }} Poster" class="d-block w-100" style="object-fit: fill; height: 70vh;filter:  blur(6px) ;
+            -webkit-filter:  blur(6px) ;
+            -moz-filter:  blur(6px) ;  border: none;">
+                </div>
+            </div>
+            <div class="carousel-caption text-left">
+                <h5 class="movie-title">{{ movie.title }}</h5>
+                <p style="width: 70%;">{{ movie.description }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="carousel-control-prev" href="#nowShowingCarousel" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </a>
+    <a class="carousel-control-next" href="#nowShowingCarousel" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </a>
+</div>
+
+<h1 style="margin-top: 15px;">Now Showing</h1>
 <div class="background">
     <div class="movie-list-container">
         <ul class="movie-list">
@@ -18,8 +55,28 @@
                     </div>
                 </div>
             </li>
+            
             {% endfor %}
         </ul>
     </div>
 </div>
+<style>
+    .c{
+        width: 100%;
+    height: 70vh;
+    /* margin: 50px 5%; */
+    overflow: hidden;
+    margin: 0px;
+}
+
+.image-holder {
+    position  : absolute;
+    left      : 0;
+    top       : 0;
+    bottom    : 0;
+    right     : 0;
+    transform : scale(1.2, 1.2);
+}
+</style>
+
 {% endblock %}
